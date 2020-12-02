@@ -1,0 +1,81 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+  
+
+ void dfs(vector<vector<int>> & grid, vector<vector<bool>> & visited, int r, int c, int &c1)
+  {
+    if (r < 0 || c < 0 || r >= grid.size()|| c >= grid.size() || grid[r][c] == 0 ||
+        visited[r][c] == true)
+    {
+    
+      return;
+    }
+          c1++;
+    
+visited[r][c]=true;
+        dfs(grid, visited, r, c - 1, c1);
+      
+
+    
+
+        dfs(grid, visited, r, c + 1, c1);
+      
+
+    
+
+        dfs(grid, visited, r - 1, c, c1);
+      
+   
+
+        dfs(grid, visited, r + 1, c, c1);
+     
+
+  }
+  
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        vector<vector<int>> grid(n , vector<int> (n, 0));
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                cin>>grid[i][j];
+            }
+        }
+        int res;
+        cin>>res;
+        vector<vector<bool>> visited(grid.size(), vector<bool>(grid[0].size(), false));
+
+
+    unordered_map<int,pair<int,int>> mp;
+    int countis=0;
+
+for (int i = 0; i <n; i++)
+    {
+      for (int j = 0; j < n; j++)
+      {
+        if (grid[i][j] == 1 && visited[i][j] == false)
+        {
+          countis = 0;
+          dfs(grid, visited, i, j, countis);
+
+          mp[countis]={i,j};
+        }
+      }
+    }
+  
+        
+       
+     if(mp.find(res)!=mp.end()){
+         
+        pair<int,int> x=mp.at(res);
+        cout<<x.first<<" "<<x.second<<endl;
+      }
+     
+
+    }
+    return 0;
+}
