@@ -1,0 +1,46 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int n,p;
+    cin>>n>>p;
+    int arr[n];
+    memset(arr, 0, sizeof(arr));
+    int a,b;
+    int count=1;
+    for(int i=0;i<p;i++){
+        cin>>a>>b;
+        if(arr[a]==0 && arr[b]==0){
+           arr[a]=count;
+            arr[b]=count;
+            count++;
+        }else if( arr[a]!=0){
+            arr[b]=arr[a];
+        }else if(arr[b]!=0){
+            arr[a]=arr[b];
+        }
+        
+    }
+    int con=0;
+    int arrcon[n];
+    memset(arrcon, 0, sizeof(arrcon));
+
+    
+    for(int i=0;i<n;i++){
+        if( arrcon[arr[i]]==0){
+            arrcon[arr[i]]++;
+            con++;
+         }else{
+            arrcon[arr[i]]++;
+
+        }
+
+    }
+    if(arrcon[0]==0){
+    cout<<con;
+    }else{
+        cout<<con+arrcon[0]-1;
+    }
+
+    
+    return 0;
+}
